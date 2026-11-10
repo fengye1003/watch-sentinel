@@ -1,0 +1,13 @@
+# runtime data & secrets
+data/
+models/*.onnx
+
+# python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# logs / temp
+*.log
+.cache/

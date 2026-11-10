@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#141218">
+<title>守望 · Sentinel</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<svg class="sprite" aria-hidden="true">
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 2 4 5.5v6.2c0 5 3.4 9.1 8 10.3 4.6-1.2 8-5.3 8-10.3V5.5L12 2Zm0 4.2 4.7 2v3.5c0 3.2-2 5.9-4.7 6.9-2.7-1-4.7-3.7-4.7-6.9V8.2l4.7-2Z"/></symbol>
+  <symbol id="i-camera" viewBox="0 0 24 24"><path d="M9 3 7.2 5H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-3.2L15 3H9Zm3 5.5A5.5 5.5 0 1 1 12 19.5a5.5 5.5 0 0 1 0-11Zm0 2a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Z"/></symbol>
+  <symbol id="i-bt" viewBox="0 0 24 24"><path d="M17.7 7.7 12 2h-1v7.6L6.4 5 5 6.4 10.6 12 5 17.6 6.4 19l4.6-4.6V22h1l5.7-5.7L13.4 12l4.3-4.3Zm-2.8-.4L13 5.4v3.8l1.9-1.9Zm0 9.4L13 18.6v-3.8l1.9 1.9Z"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><path d="M2.4 20.4 22 12 2.4 3.6 2.3 10l14 2-14 2 .1 6.4Z"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M12 5V2L8 6l4 4V7a5 5 0 1 1-5 5H5a7 7 0 1 0 7-7Z"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M7 21a2 2 0 0 1-2-2V6H4V4h5V3h6v1h5v2h-1v13a2 2 0 0 1-2 2H7Zm2-4h2V8H9v9Zm4 0h2V8h-2v9Z"/></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><path d="M12 17a5 5 0 1 1 0-10 5 5 0 0 1 0 10Zm0-13a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0V5a1 1 0 0 1 1-1Zm0 15a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0v-1a1 1 0 0 1 1-1ZM4 11h1a1 1 0 1 1 0 2H4a1 1 0 1 1 0-2Zm15 0h1a1 1 0 1 1 0 2h-1a1 1 0 1 1 0-2ZM6.3 5.3l.7.7a1 1 0 0 1-1.4 1.4l-.7-.7a1 1 0 0 1 1.4-1.4Zm11.4 11.4.7.7a1 1 0 0 1-1.4 1.4l-.7-.7a1 1 0 0 1 1.4-1.4Zm.7-11.4a1 1 0 0 1 0 1.4l-.7.7a1 1 0 0 1-1.4-1.4l.7-.7a1 1 0 0 1 1.4 0ZM7 16.7a1 1 0 0 1 0 1.4l-.7.7a1 1 0 0 1-1.4-1.4l.7-.7a1 1 0 0 1 1.4 0ZM12 1a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0V2a1 1 0 0 1 1-1Z"/></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path d="M12.3 2a9.7 9.7 0 1 0 9.7 9.7c0-.4 0-.8-.1-1.2a7.3 7.3 0 0 1-9.4-9.3l-.2.8Zm-2 3a7.7 7.7 0 1 1 8.4 10.4A9.3 9.3 0 0 0 10.3 5Z"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M12 5c5 0 9 4.5 10 7-1 2.5-5 7-10 7S3 14.5 2 12c1-2.5 5-7 10-7Zm0 2c-3.5 0-6.6 3-7.7 5 1.1 2 4.2 5 7.7 5s6.6-3 7.7-5C18.6 10 15.5 7 12 7Zm0 1.5a3.5 3.5 0 1 1 0 7 3.5 3.5 0 0 1 0-7Z"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/></symbol>
+  <symbol id="i-logout" viewBox="0 0 24 24"><path d="M10 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h5v-2H5V5h5V3Zm5.6 4.4L14.2 8.8 16.4 11H9v2h7.4l-2.2 2.2 1.4 1.4L20 12l-4.4-4.6Z"/></symbol>
+</svg>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="logo"><svg><use href="#i-shield"/></svg></span>
+    <div class="brand-text">
+      <h1>守望</h1>
+      <span>SENTINEL</span>
+    </div>
+  </div>
+  <div class="topbar-actions">
+    <span id="gateChip" class="chip"><span class="dot"></span><span id="gateText">连接中…</span></span>
+    <label class="switch" title="哨兵模式">
+      <input type="checkbox" id="armSwitch">
+      <span class="track"><span class="thumb"></span></span>
+    </label>
+    <button class="icon-btn" id="logoutBtn" title="退出登录" hidden><svg><use href="#i-logout"/></svg></button>
+    <button class="icon-btn" id="themeBtn" title="切换主题"><svg><use href="#i-sun"/></svg></button>
+  </div>
+</header>
+
+<main>
+  <section class="stat-row">
+    <article class="stat">
+      <div class="stat-icon phone"><svg><use href="#i-bt"/></svg></div>
+      <div><p class="label">手机蓝牙</p><p class="value" id="statPhone">—</p><p class="hint" id="statPhoneHint">等待检测</p></div>
+    </article>
+    <article class="stat">
+      <div class="stat-icon cam"><svg><use href="#i-camera"/></svg></div>
+      <div><p class="label">摄像头</p><p class="value" id="statCam">—</p><p class="hint" id="statCamHint">未打开</p></div>
+    </article>
+    <article class="stat">
+      <div class="stat-icon mode"><svg><use href="#i-shield"/></svg></div>
+      <div><p class="label">哨兵状态</p><p class="value" id="statMode">待机</p><p class="hint" id="statModeHint">—</p></div>
+    </article>
+    <article class="stat">
+      <div class="stat-icon alert"><svg><use href="#i-bolt"/></svg></div>
+      <div><p class="label">累计告警</p><p class="value" id="statAlerts">0</p><p class="hint" id="statAlertsHint">—</p></div>
+    </article>
+  </section>
+
+  <div class="grid">
+    <section class="card span-7">
+      <div class="card-head">
+        <div>
+          <h2>实时画面</h2>
+          <p class="support">低耗检测：帧差 + YuNet 人脸 + 运动目标</p>
+        </div>
+        <label class="switch small" title="实时预览">
+          <input type="checkbox" id="previewSwitch">
+          <span class="track"><span class="thumb"></span></span>
+        </label>
+      </div>
+      <div class="frame" id="frame">
+        <img id="preview" alt="摄像头预览" hidden>
+        <div class="frame-empty" id="frameEmpty">
+          <svg><use href="#i-eye"/></svg>
+          <p>打开右侧「实时画面」开关即可预览</p>
+        </div>
+        <div class="frame-badge" id="frameBadge">OFFLINE</div>
+      </div>
+      <div class="metric-row">
+        <div class="metric"><span>变化</span><b id="mChange">0.0%</b></div>
+        <div class="metric"><span>速度</span><b id="mSpeed">0.0%/s</b></div>
+        <div class="metric"><span>人脸</span><b id="mFaces">0</b></div>
+        <div class="metric"><span>耗时</span><b id="mMs">—</b></div>
+      </div>
+    </section>
+
+    <section class="card span-5">
+      <div class="card-head">
+        <div><h2>触发条件</h2><p class="support">手机不在 + 电脑不在用，才报警</p></div>
+        <button class="icon-btn" id="btRefresh" title="刷新"><svg><use href="#i-refresh"/></svg></button>
+      </div>
+      <div class="field-row">
+        <label class="field grow">
+          <span>目标设备名</span>
+          <input type="text" id="btTarget" placeholder="My Phone" autocomplete="off">
+        </label>
+        <label class="switch-wrap">
+          <span>生效</span>
+          <label class="switch small"><input type="checkbox" id="btEnabled"><span class="track"><span class="thumb"></span></span></label>
+        </label>
+      </div>
+      <label class="switch-row">
+        <span><b>要求手机断开</b><small>手机连上电脑时哨兵自动待机</small></span>
+        <label class="switch small"><input type="checkbox" id="btRequire"><span class="track"><span class="thumb"></span></span></label>
+      </label>
+      <div class="device-list" id="deviceList"></div>
+      <p class="support dim" id="btHint">—</p>
+
+      <div class="divider"></div>
+      <label class="switch-row">
+        <span><b>电脑在用时不报警</b><small>屏幕亮度非最低 且 未锁屏 ⇒ 视为你还在电脑前</small></span>
+        <label class="switch small"><input type="checkbox" id="presenceEnabled"><span class="track"><span class="thumb"></span></span></label>
+      </label>
+      <div class="presence-row" id="presenceRow">
+        <span class="p-dot" id="presenceDot"></span>
+        <span id="presenceText">屏幕亮度 — · —</span>
+      </div>
+    </section>
+
+    <section class="card span-5">
+      <div class="card-head"><div><h2>检测阈值</h2><p class="support">改动即时保存并生效</p></div>
+        <button class="text-btn" id="drillBtn" title="按当前阈值试跑 10 秒，不发 TG">演练 10s</button>
+      </div>
+
+      <div class="slider-row">
+        <div class="slider-head"><span>对比间隔</span><b id="vCompare">5.0 s</b></div>
+        <input type="range" id="sCompare" min="1" max="60" step="0.5">
+      </div>
+      <div class="slider-row">
+        <div class="slider-head"><span>画面变化阈值</span><b id="vChange">2.0 %</b></div>
+        <input type="range" id="sChange" min="0.1" max="20" step="0.1">
+      </div>
+      <div class="slider-row">
+        <div class="slider-head"><span>像素差阈值</span><b id="vPixel">25</b></div>
+        <input type="range" id="sPixel" min="5" max="80" step="1">
+      </div>
+      <div class="slider-row">
+        <div class="slider-head"><span>运动速度阈值</span><b id="vSpeed">12 %/s</b></div>
+        <input type="range" id="sSpeed" min="1" max="100" step="1">
+      </div>
+      <div class="slider-row">
+        <div class="slider-head"><span>告警冷却</span><b id="vCooldown">60 s</b></div>
+        <input type="range" id="sCooldown" min="10" max="600" step="10">
+      </div>
+
+      <div class="divider"></div>
+      <label class="switch-row">
+        <span><b>人脸检测</b><small>YuNet · 置信度 <b id="vFaceScore">0.80</b> · 最小 <b id="vFaceSize">48</b>px</small></span>
+        <label class="switch small"><input type="checkbox" id="faceEnabled"><span class="track"><span class="thumb"></span></span></label>
+      </label>
+      <div class="mini-sliders" id="faceSliders">
+        <input type="range" id="sFaceScore" min="0.3" max="0.95" step="0.05">
+        <input type="range" id="sFaceSize" min="16" max="200" step="4">
+      </div>
+      <label class="switch-row">
+        <span><b>人形轮廓</b><small>运动区域面积 ≥ <b id="vBodyRatio">8</b>%</small></span>
+        <label class="switch small"><input type="checkbox" id="bodyEnabled"><span class="track"><span class="thumb"></span></span></label>
+      </label>
+      <div class="mini-sliders" id="bodySliders">
+        <input type="range" id="sBodyRatio" min="1" max="40" step="1">
+      </div>
+
+      <div class="divider"></div>
+      <label class="switch-row">
+        <span><b>连拍取最清晰</b><small>人形触发时连拍，按清晰度挑最好的几张放进同一条 TG 相册</small></span>
+        <label class="switch small"><input type="checkbox" id="burstEnabled"><span class="track"><span class="thumb"></span></span></label>
+      </label>
+      <div class="slider-row">
+        <div class="slider-head"><span>拍摄间隔</span><b id="vBurstInterval">150 ms</b></div>
+        <input type="range" id="sBurstInterval" min="50" max="1000" step="10">
+      </div>
+      <div class="slider-row">
+        <div class="slider-head"><span>连拍张数</span><b id="vBurstCount">6 张</b></div>
+        <input type="range" id="sBurstCount" min="2" max="12" step="1">
+      </div>
+      <div class="slider-row">
+        <div class="slider-head"><span>发送张数（最清晰 m 张）</span><b id="vBurstKeep">3 张</b></div>
+        <input type="range" id="sBurstKeep" min="1" max="10" step="1">
+      </div>
+    </section>
+
+    <section class="card span-7">
+      <div class="card-head"><div><h2>事件记录</h2><p class="support">触发与系统事件，截图保留最近 200 张</p></div>
+        <button class="text-btn" id="clearEvents"><svg><use href="#i-trash"/></svg>清空</button></div>
+      <div class="events" id="events">
+        <p class="empty">暂无事件</p>
+      </div>
+    </section>
+
+    <section class="card span-6">
+      <div class="card-head"><div><h2>Telegram 推送</h2><p class="support">告警发送到你的私聊</p></div>
+        <div class="btn-group">
+          <button class="text-btn" id="tgSimulate" title="用当前画面模拟一次告警">模拟告警</button>
+          <button class="tonal-btn" id="tgTest"><svg><use href="#i-send"/></svg>测试</button>
+        </div>
+      </div>
+      <div class="field-row">
+        <label class="field grow"><span>Chat ID</span><input type="text" id="tgChat" inputmode="numeric"></label>
+        <label class="field grow"><span>代理</span><input type="text" id="tgProxy" placeholder="http://127.0.0.1:7897"></label>
+      </div>
+      <label class="switch-row">
+        <span><b>人形触发时附截图</b><small>变化告警只发文字</small></span>
+        <label class="switch small"><input type="checkbox" id="tgPhoto"><span class="track"><span class="thumb"></span></span></label>
+      </label>
+      <label class="switch-row">
+        <span><b>变化时发送文字告警</b><small>关闭则仅在检测到人形时提醒</small></span>
+        <label class="switch small"><input type="checkbox" id="tgText"><span class="track"><span class="thumb"></span></span></label>
+      </label>
+      <p class="support dim" id="tgStatus">尚未发送</p>
+    </section>
+
+    <section class="card span-6">
+      <div class="card-head"><div><h2>摄像头与高级</h2><p class="support">设备序号、后端、空闲释放</p></div>
+        <button class="text-btn" id="camProbe">探测</button></div>
+      <div class="field-row">
+        <label class="field"><span>序号</span><input type="number" id="camIndex" min="0" max="8" step="1"></label>
+        <label class="field">
+          <span>后端</span>
+          <select id="camBackend">
+            <option value="dshow">DirectShow</option>
+            <option value="msmf">MediaFoundation</option>
+            <option value="auto">自动</option>
+          </select>
+        </label>
+        <label class="field"><span>帧率</span><input type="number" id="camFps" min="1" max="30" step="1"></label>
+      </div>
+      <div class="field-row">
+        <label class="field grow"><span>空闲释放（秒）</span><input type="number" id="camIdle" min="5" max="600" step="5"></label>
+        <label class="field grow"><span>监听端口</span><input type="number" id="apiPort" min="1024" max="65535" step="1"></label>
+      </div>
+      <label class="field">
+        <span>API Token（留空则不校验）</span>
+        <input type="text" id="apiToken" autocomplete="off" placeholder="tailnet 内可不设">
+      </label>
+      <p class="support dim">修改端口 / Token 需重启服务生效。当前面板：<code id="panelUrl">—</code></p>
+      <p class="support dim">登录保护：TOTP（与 DSH 同一验证器）· 会话 <span id="authDays">30</span> 天 · 右上角可退出</p>
+    </section>
+  </div>
+</main>
+
+<div class="snackbar" id="snackbar" role="status"></div>
+
+<footer class="foot">守望 Sentinel · 仅在本机运行 · 摄像头空闲时自动关闭</footer>
+<script src="/static/app.js"></script>
+</body>
+</html>

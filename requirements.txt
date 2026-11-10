@@ -1,0 +1,6 @@
+opencv-python-headless>=4.8
+numpy>=1.24
+requests>=2.28
+starlette>=0.36
+uvicorn>=0.23
+pywin32>=306; platform_system == "Windows"
