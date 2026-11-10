@@ -1,5 +1,5 @@
 $ErrorActionPreference = "Stop"
-$Root = Split-Path -Parent $MyInvocation.MyCommand.Path
+if ($PSScriptRoot) { $Root = $PSScriptRoot } else { $Root = Split-Path -Parent $MyInvocation.MyCommand.Path }
 Set-Location $Root
 
 $port = 8099
@@ -40,3 +40,4 @@ try {
     Write-Host "[sentinel] failed to start; see data\server.err.log"
     exit 1
 }
+

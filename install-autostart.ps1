@@ -1,26 +1,28 @@
 $ErrorActionPreference = "Stop"
-$Root = Split-Path -Parent $MyInvocation.MyCommand.Path
+if ($PSScriptRoot) { $Root = $PSScriptRoot } else { $Root = Split-Path -Parent $MyInvocation.MyCommand.Path }
 $TaskName = "SentinelWatch"
 $DogName = "SentinelWatchdog"
 
 $ps = Join-Path $env:SystemRoot "System32\WindowsPowerShell\v1.0\powershell.exe"
-# 2026-11-10: 走 wscript + VBS 壳，避免任务计划程序每 5 分钟闪一个控制台窗口。
-# powershell.exe -WindowStyle Hidden 由任务计划程序拉起时，窗口先建后隐藏 => 会闪。
+
+# 2026-11-10: use wscript + hidden VBS host. Task Scheduler + powershell.exe
+# -WindowStyle Hidden still flashes a console window (the window is created
+# before the flag applies). wscript.exe is a GUI-subsystem host, so
+# WScript.Shell.Run(cmd, 0, False) gives a truly invisible process.
 $vbs = Join-Path $Root "watchdog-hidden.vbs"
-if (-not (Test-Path $vbs)) { throw "missing $vbs" }
+if (-not (Test-Path -LiteralPath $vbs)) { throw "missing $vbs" }
 $ws = Join-Path $env:SystemRoot "System32\wscript.exe"
 $action = New-ScheduledTaskAction -Execute $ws -Argument "`"$vbs`""
 $principal = New-ScheduledTaskPrincipal -UserId "$env:USERDOMAIN\$env:USERNAME" -LogonType Interactive -RunLevel Limited
 $settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries `
     -StartWhenAvailable -ExecutionTimeLimit ([TimeSpan]::Zero) -MultipleInstances IgnoreNew
 
-# 1) 登录自启
+# 1) start at logon
 $logonTrigger = New-ScheduledTaskTrigger -AtLogOn -User $env:USERNAME
 Register-ScheduledTask -TaskName $TaskName -Action $action -Trigger $logonTrigger `
     -Principal $principal -Settings $settings -Description "Watch Sentinel - start at logon" -Force | Out-Null
 
-# 2) 看门狗：每 5 分钟跑一次 start.ps1（已在运行会立刻退出），
-#    覆盖睡眠/崩溃/注销后没起来的情况
+# 2) keepalive: run start.ps1 every 5 minutes (it exits immediately if running)
 $dogTrigger = New-ScheduledTaskTrigger -Once -At (Get-Date).AddMinutes(2) `
     -RepetitionInterval (New-TimeSpan -Minutes 5) `
     -RepetitionDuration (New-TimeSpan -Days 3650)
